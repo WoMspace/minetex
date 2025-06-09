@@ -83,7 +83,9 @@ fn main() -> ExitCode {
 						} else {
 							lines.push(current_line);
 							current_line = String::default();
-							words.push_front(next_word[i..].into());
+							// have to carefully add the remaining characters — they are not necessarily bytes, as `next_word[i..]` would do.
+							let remaining_word: String = next_word.char_indices().filter_map(|(index, c)| if index > i { Some(c)} else { None }).collect();
+							words.push_front(remaining_word);
 							continue 'word_loop
 						}
 					}
@@ -140,11 +142,12 @@ fn main() -> ExitCode {
 
 fn mc_char_len(c: char) -> i32 {
 	if r"AaBbCcDdEeFGgHhJjKLMmNnOoPpQqRrSsTUuVvWwXxYyZz#$%+-/0123456789=?@\^_£".contains(c) { 5 }
-	else if "fk<>".contains(c) { 4 }
+	else if "fk<>“”°".contains(c) { 4 }
 	else if r#" It"()*[]{}"#.contains(c) { 3 }
-	else if "l`".contains(c) { 2 }
+	else if "l`‘’".contains(c) { 2 }
 	else if "i!',.:;|".contains(c) { 1 }
 	else if c == '\n' { 0 }
+	else if c == '—' { 8 }
 	else { eprintln!("Unknown width of glyph '{c}': assuming 16px wide"); 16 }
 }
 
