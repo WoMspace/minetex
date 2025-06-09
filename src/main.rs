@@ -145,7 +145,7 @@ fn mc_char_len(c: char) -> i32 {
 	else if "l`".contains(c) { 2 }
 	else if "i!',.:;|".contains(c) { 1 }
 	else if c == '\n' { 0 }
-	else { eprintln!("Unknown width of character '{c}': assuming 5px wide"); 5 }
+	else { eprintln!("Unknown width of glyph '{c}': assuming 16px wide"); 16 }
 }
 
 fn error_and_exit(msg: &str, e: std::io::Error) -> ExitCode {
