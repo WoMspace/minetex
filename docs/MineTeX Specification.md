@@ -1,7 +1,3 @@
-<style>
-body { font-family: STIXGeneral, serif; }
-p,li { font-size: 12pt }
-</style>
 # MineTeX Document Specification
 A very simple TeX-inspired typesetter for Minecraft Written Books.
 It serves two purposes — converting existing text documents easily into strictly paginated Minecraft books,
